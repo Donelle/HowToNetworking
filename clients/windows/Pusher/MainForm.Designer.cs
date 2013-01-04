@@ -30,6 +30,7 @@
 			this.label2 = new System.Windows.Forms.Label();
 			this.txtNotification = new System.Windows.Forms.RichTextBox();
 			this.btnSend = new System.Windows.Forms.Button();
+			this.btnRefresh = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// label1
@@ -48,7 +49,7 @@
 			this.cmbRecipients.FormattingEnabled = true;
 			this.cmbRecipients.Location = new System.Drawing.Point(80, 13);
 			this.cmbRecipients.Name = "cmbRecipients";
-			this.cmbRecipients.Size = new System.Drawing.Size(191, 21);
+			this.cmbRecipients.Size = new System.Drawing.Size(130, 21);
 			this.cmbRecipients.TabIndex = 1;
 			// 
 			// label2
@@ -78,11 +79,21 @@
 			this.btnSend.Text = "Send Notification";
 			this.btnSend.UseVisualStyleBackColor = true;
 			// 
+			// btnRefresh
+			// 
+			this.btnRefresh.Location = new System.Drawing.Point(216, 11);
+			this.btnRefresh.Name = "btnRefresh";
+			this.btnRefresh.Size = new System.Drawing.Size(54, 23);
+			this.btnRefresh.TabIndex = 5;
+			this.btnRefresh.Text = "Refresh";
+			this.btnRefresh.UseVisualStyleBackColor = true;
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(288, 197);
+			this.Controls.Add(this.btnRefresh);
 			this.Controls.Add(this.btnSend);
 			this.Controls.Add(this.txtNotification);
 			this.Controls.Add(this.label2);
@@ -104,6 +115,7 @@
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.RichTextBox txtNotification;
 		private System.Windows.Forms.Button btnSend;
+		private System.Windows.Forms.Button btnRefresh;
 	}
 }
 

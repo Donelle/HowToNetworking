@@ -28,6 +28,8 @@ namespace Pusher
 				_refreshRecipients ();
 			};
 
+			this.btnRefresh.Click += (o, e) => _refreshRecipients ();
+
 			this.btnSend.Click += (o, e) => {
 				try {
 					var content = new PusherContent {
