@@ -31,6 +31,9 @@
 			this.txtNotification = new System.Windows.Forms.RichTextBox();
 			this.btnSend = new System.Windows.Forms.Button();
 			this.btnRefresh = new System.Windows.Forms.Button();
+			this.imageBox = new System.Windows.Forms.PictureBox();
+			this.lblDragInstruction = new System.Windows.Forms.Label();
+			((System.ComponentModel.ISupportInitialize)(this.imageBox)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// label1
@@ -71,8 +74,9 @@
 			// 
 			// btnSend
 			// 
+			this.btnSend.Enabled = false;
 			this.btnSend.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.btnSend.Location = new System.Drawing.Point(92, 155);
+			this.btnSend.Location = new System.Drawing.Point(80, 277);
 			this.btnSend.Name = "btnSend";
 			this.btnSend.Size = new System.Drawing.Size(108, 33);
 			this.btnSend.TabIndex = 4;
@@ -88,11 +92,32 @@
 			this.btnRefresh.Text = "Refresh";
 			this.btnRefresh.UseVisualStyleBackColor = true;
 			// 
+			// imageBox
+			// 
+			this.imageBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.imageBox.Location = new System.Drawing.Point(20, 149);
+			this.imageBox.Name = "imageBox";
+			this.imageBox.Size = new System.Drawing.Size(250, 122);
+			this.imageBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+			this.imageBox.TabIndex = 6;
+			this.imageBox.TabStop = false;
+			// 
+			// lblDragInstruction
+			// 
+			this.lblDragInstruction.AutoSize = true;
+			this.lblDragInstruction.Location = new System.Drawing.Point(54, 204);
+			this.lblDragInstruction.Name = "lblDragInstruction";
+			this.lblDragInstruction.Size = new System.Drawing.Size(178, 13);
+			this.lblDragInstruction.TabIndex = 7;
+			this.lblDragInstruction.Text = "Drag and Drop jpeg/png image here";
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(288, 197);
+			this.ClientSize = new System.Drawing.Size(288, 322);
+			this.Controls.Add(this.lblDragInstruction);
+			this.Controls.Add(this.imageBox);
 			this.Controls.Add(this.btnRefresh);
 			this.Controls.Add(this.btnSend);
 			this.Controls.Add(this.txtNotification);
@@ -103,6 +128,7 @@
 			this.Name = "MainForm";
 			this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
 			this.Text = "Notification Sender";
+			((System.ComponentModel.ISupportInitialize)(this.imageBox)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -116,6 +142,8 @@
 		private System.Windows.Forms.RichTextBox txtNotification;
 		private System.Windows.Forms.Button btnSend;
 		private System.Windows.Forms.Button btnRefresh;
+		private System.Windows.Forms.PictureBox imageBox;
+		private System.Windows.Forms.Label lblDragInstruction;
 	}
 }
 

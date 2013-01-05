@@ -92,28 +92,21 @@ namespace PusherService
 		void IPusherService.Push (PusherContent content)
 		{
 			content.Guard ("recipient parameter was null");
-
 			List<Byte[]> bits = new List<Byte[]> ();
-			NotificationType notificationType = NotificationType.Both;
-
+			
 			if (!String.IsNullOrEmpty (content.Text)) {
-				notificationType = NotificationType.Text;
+				bits.Add (BitConverter.GetBytes ((Int32)NotificationType.Text));
 				bits.Add (BitConverter.GetBytes (content.Text.Length));
 				bits.Add (Encoding.UTF8.GetBytes (content.Text));
+				Parallel.ForEach (content.Recipients, recipient => _SendMessage (recipient, bits.Collapse ()));
 			}
 
 			if (!content.Image.IsNullOrDefault () && content.Image.Length > 0) {
-				notificationType = NotificationType.Image;
+				bits.Add (BitConverter.GetBytes ((Int32)NotificationType.Image));
 				bits.Add (BitConverter.GetBytes (content.Image.Length));
 				bits.Add (content.Image);
+				Parallel.ForEach (content.Recipients, recipient => _SendMessage (recipient, bits.Collapse ()));
 			}
-
-			if (bits.Count == 4) notificationType = NotificationType.Both;
-			bits.Insert (0, BitConverter.GetBytes ((Int32)notificationType));
-
-			Parallel.ForEach (content.Recipients, recipient => 
-				_SendMessage (recipient, bits.Collapse ())
-			);
 		}
 
 		IEnumerable<PusherRecipient> IPusherService.GetRecipients ()
