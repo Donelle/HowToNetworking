@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B94E5F81697443B00FE7AC9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B994EFE1694D7BC00A427DF /* CoreGraphics.framework */; };
 		2B994EFB1694D7BC00A427DF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B994EFA1694D7BC00A427DF /* UIKit.framework */; };
 		2B994EFD1694D7BC00A427DF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B994EFC1694D7BC00A427DF /* Foundation.framework */; };
 		2B994F051694D7BC00A427DF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2B994F031694D7BC00A427DF /* InfoPlist.strings */; };
@@ -22,7 +23,6 @@
 		2B994F2C1694E3A400A427DF /* PDRepository.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B994F2B1694E3A400A427DF /* PDRepository.m */; };
 		2B994F321694E7C400A427DF /* Pusher.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2B994F301694E7C400A427DF /* Pusher.xcdatamodeld */; };
 		2B994F351694EFF400A427DF /* PDNotificationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B994F341694EFF400A427DF /* PDNotificationModel.m */; };
-		2BA8CCDD169628830081CD9F /* NSDate+PDDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BA8CCDC169628830081CD9F /* NSDate+PDDate.m */; };
 		2BA8CCE2169649C20081CD9F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BA8CCE1169649C20081CD9F /* QuartzCore.framework */; };
 		2BA8CCE5169649E20081CD9F /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BA8CCE4169649E20081CD9F /* CoreData.framework */; };
 		2BA8CCE816964D0A0081CD9F /* PDRegistrar.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BA8CCE716964D0A0081CD9F /* PDRegistrar.m */; };
@@ -54,8 +54,6 @@
 		2B994F311694E7C400A427DF /* Pusher.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Pusher.xcdatamodel; sourceTree = "<group>"; };
 		2B994F331694EFF400A427DF /* PDNotificationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDNotificationModel.h; sourceTree = "<group>"; };
 		2B994F341694EFF400A427DF /* PDNotificationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDNotificationModel.m; sourceTree = "<group>"; };
-		2BA8CCDB169628830081CD9F /* NSDate+PDDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+PDDate.h"; sourceTree = "<group>"; };
-		2BA8CCDC169628830081CD9F /* NSDate+PDDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+PDDate.m"; sourceTree = "<group>"; };
 		2BA8CCE1169649C20081CD9F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		2BA8CCE4169649E20081CD9F /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		2BA8CCE616964D0A0081CD9F /* PDRegistrar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDRegistrar.h; sourceTree = "<group>"; };
@@ -67,6 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B94E5F81697443B00FE7AC9 /* CoreGraphics.framework in Frameworks */,
 				2BA8CCE5169649E20081CD9F /* CoreData.framework in Frameworks */,
 				2BA8CCE2169649C20081CD9F /* QuartzCore.framework in Frameworks */,
 				2B994EFB1694D7BC00A427DF /* UIKit.framework in Frameworks */,
@@ -123,8 +122,6 @@
 				2B994F2B1694E3A400A427DF /* PDRepository.m */,
 				2BA8CCE616964D0A0081CD9F /* PDRegistrar.h */,
 				2BA8CCE716964D0A0081CD9F /* PDRegistrar.m */,
-				2BA8CCDB169628830081CD9F /* NSDate+PDDate.h */,
-				2BA8CCDC169628830081CD9F /* NSDate+PDDate.m */,
 				2B994F011694D7BC00A427DF /* Supporting Files */,
 			);
 			path = Pusher;
@@ -221,7 +218,6 @@
 				2B994F2C1694E3A400A427DF /* PDRepository.m in Sources */,
 				2B994F321694E7C400A427DF /* Pusher.xcdatamodeld in Sources */,
 				2B994F351694EFF400A427DF /* PDNotificationModel.m in Sources */,
-				2BA8CCDD169628830081CD9F /* NSDate+PDDate.m in Sources */,
 				2BA8CCE816964D0A0081CD9F /* PDRegistrar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

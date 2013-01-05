@@ -99,11 +99,18 @@
 
 -(void)insertNotification:(NSData *)content type:(PDNotificationType)type
 {
-    PDNotificationModel * entity = (PDNotificationModel *)[NSEntityDescription entityForName:@"Notification" inManagedObjectContext:_managedObjectContext];
+    PDNotificationModel * entity = [NSEntityDescription insertNewObjectForEntityForName:@"Notification" inManagedObjectContext:_managedObjectContext];
     entity.content = content;
     entity.type = (int16_t)type;
-    entity.createDate = [NSDate date];
+    entity.createDate = [[NSDate date] timeIntervalSince1970];
     
+    [self saveChanges];
+}
+
+
+- (void)deleteNotification:(PDNotificationModel *)notification
+{
+    [_managedObjectContext deleteObject:notification];
     [self saveChanges];
 }
 

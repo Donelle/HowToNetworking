@@ -12,19 +12,36 @@
 - (NSString *)stringFromData;
 - (UIImage *)imageFromData;
 
-
 @end
 
 @implementation NSData (C7NSDataExtension)
 
 - (NSString *)stringFromData
 {
-    return [NSString stringWithUTF8String:(const char *) [self bytes]];
+    int32_t blockSize = sizeof(int32_t);
+    NSUInteger textLength = 0;
+    NSRange textLengthRange = { 0, blockSize };
+    
+    [self getBytes:&textLength range:textLengthRange];
+    textLengthRange.location += blockSize;
+    textLengthRange.length = textLength;
+    
+    return [NSString stringWithUTF8String:(const char *)
+            [[self subdataWithRange:textLengthRange] bytes]];
+    
 }
 
 - (UIImage *)imageFromData
 {
-    return [UIImage imageWithData:[self bytes]];
+    int32_t blockSize = sizeof(int32_t);
+    NSUInteger imageLength = 0;
+    NSRange imageRange = { 0, blockSize };
+
+    [self getBytes:&imageLength range:imageRange];
+    imageRange.location += blockSize;
+    imageRange.length = imageLength;
+    
+    return [UIImage imageWithData:[self subdataWithRange:imageRange]];
 }
 
 @end
@@ -36,35 +53,31 @@
 
 + (id)parse:(NSData *)data
 {
-    uint32_t blockSize = sizeof(uint32_t);
-    NSUInteger formatType = 0, contentSize = 0;
-    NSRange formatRange = { 0, blockSize }, contentSizeRange = { blockSize, blockSize };
+    int32_t blockSize = sizeof(int32_t);
     
+    NSUInteger formatType = 0;
+    NSRange formatRange = { 0, blockSize };
     [data getBytes:&formatType range:formatRange];
-#ifdef DEBUG
-    NSLog(@"Format Type: %u", formatType);
-#endif //DEBUG
-    
-    [data getBytes:&contentSize range:contentSizeRange];
-#ifdef DEBUG
-    NSLog(@"Content Size: %u", contentSize);
-#endif //DEBUG
-    
-    NSRange contentRange = { contentSizeRange.location + blockSize, contentSize };
+
+    NSRange contentRange = { blockSize, data.length - blockSize };
     NSData * content = [data subdataWithRange:contentRange];
     
     id resultSet = nil;
     switch (formatType) {
         case PDFormatTypeImage:
-            resultSet = [content imageFromData];
+        {
+            resultSet = [content imageFromData]; 
             break;
+        }
             
         case PDFormatTypeText:
+        {
             resultSet = [content stringFromData];
             break;
+        }
             
         case PDFormatTypeBoth:
-            resultSet = content;
+            NSLog(@"We're not going to implement PDFormatTypeBoth in this tutorial!");
             break;
             
         default:
@@ -77,30 +90,12 @@
 
 + (NSString *)stringFromData:(NSData *)data
 {
-    return [data stringFromData];
+    return [NSString stringWithUTF8String:(const char *) [data bytes]];
 }
 
 + (UIImage *)imageFromData:(NSData *)data
 {
-    return [data imageFromData];
-}
-
-+ (NSDictionary *)dictionaryFromData:(NSData *)data
-{
-    uint32_t blockSize = sizeof(uint32_t);
-    NSUInteger textLength = 0;
-    NSRange textLengthRange = { 0, blockSize };
-    
-    [data getBytes:&textLength range:textLengthRange];
-    textLengthRange.location += blockSize;
-    textLengthRange.length = textLength;
-    NSString * text = [[data subdataWithRange:textLengthRange] stringFromData];
-    
-    NSRange imageRange = { textLengthRange.length + blockSize, 0 };
-    imageRange.length = data.length - imageRange.location;
-    UIImage * image = [[data subdataWithRange:imageRange] imageFromData];
-    
-    return [NSDictionary dictionaryWithObjectsAndKeys:text, @"text", image, @"image", nil];
+    return [UIImage imageWithData:data];
 }
 
 @end

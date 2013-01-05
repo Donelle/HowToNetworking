@@ -24,6 +24,11 @@
 - (void)insertNotification:(id)notification;
 
 /*
+ * Responsible for deleting the notification
+ */
+- (void)deleteNotification:(PDNotificationModel *)notification;
+
+/*
  * Creates a fetch controller
  */
 - (NSFetchedResultsController *)createRepositoryController:(id<NSFetchedResultsControllerDelegate>)delegate;

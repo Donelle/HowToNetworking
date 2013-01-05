@@ -2,7 +2,7 @@
 //  PDNotificationModel.m
 //  Pusher
 //
-//  Created by Donelle Sanders Jr on 1/2/13.
+//  Created by Donelle Sanders Jr on 1/3/13.
 //  Copyright (c) 2013 The Potter's Den, Inc. All rights reserved.
 //
 
@@ -11,8 +11,8 @@
 
 @implementation PDNotificationModel
 
-@dynamic type;
 @dynamic content;
 @dynamic createDate;
+@dynamic type;
 
 @end

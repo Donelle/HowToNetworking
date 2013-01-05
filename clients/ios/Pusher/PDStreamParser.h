@@ -21,6 +21,5 @@ typedef enum {
 + (id)parse:(NSData *)data;
 + (NSString *)stringFromData:(NSData *)data;
 + (UIImage *)imageFromData:(NSData *)data;
-+ (NSDictionary *)dictionaryFromData:(NSData *)data;
 
 @end

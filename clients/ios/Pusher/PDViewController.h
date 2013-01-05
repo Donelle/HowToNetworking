@@ -10,8 +10,6 @@
 
 @interface PDTableViewCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UIView *containerView;
-@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *textLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 

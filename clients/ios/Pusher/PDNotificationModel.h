@@ -2,12 +2,13 @@
 //  PDNotificationModel.h
 //  Pusher
 //
-//  Created by Donelle Sanders Jr on 1/2/13.
+//  Created by Donelle Sanders Jr on 1/3/13.
 //  Copyright (c) 2013 The Potter's Den, Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+
 
 typedef enum {
     PDNotificationTypeText = 100,
@@ -15,10 +16,11 @@ typedef enum {
     PDNotificationTypeBoth = 300
 } PDNotificationType;
 
+
 @interface PDNotificationModel : NSManagedObject
 
-@property (nonatomic) int16_t type;
 @property (nonatomic, retain) NSData * content;
-@property (nonatomic, retain) NSDate * createDate;
+@property (nonatomic) NSTimeInterval createDate;
+@property (nonatomic) int16_t type;
 
 @end

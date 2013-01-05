@@ -12,7 +12,6 @@
 #import "PDStreamParser.h"
 #import "PDRegistrar.h"
 #import "PDSettings.h"
-#import "NSDate+PDDate.h"
 
 
 #pragma mark - PDTableViewCell Implementation
@@ -25,13 +24,15 @@
 
 - (void)displayText;
 - (void)displayImage;
+- (void)cellWasSwiped:(UISwipeGestureRecognizer *)recognizer;
+- (void)resizeView:(UIView *)childView;
 
 @end
 
 
 @implementation PDTableViewCell
 @synthesize model = _model;
-@synthesize containerView, dateLabel, textLabel, imageView;
+@synthesize textLabel, imageView;
 
 
 - (void)setModel:(PDNotificationModel *)model
@@ -40,35 +41,40 @@
     [self setNeedsDisplay];
 }
 
+
+-(void)awakeFromNib
+{
+    [super awakeFromNib];
+    
+    UISwipeGestureRecognizer * swipeRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(cellWasSwiped:)];
+	[swipeRecognizer setDirection:(UISwipeGestureRecognizerDirectionLeft | UISwipeGestureRecognizerDirectionRight)];
+	
+    [self.contentView addGestureRecognizer:swipeRecognizer];
+}
+
+-(void)drawRect:(CGRect)rect
+{
+    [super drawRect:rect];
+
+    UIBezierPath* rectanglePath = [UIBezierPath bezierPathWithRoundedRect:self.contentView.bounds cornerRadius:4.0f];
+    [[UIColor whiteColor] setFill];
+    [rectanglePath fill];
+    [[UIColor lightGrayColor] setStroke];
+    rectanglePath.lineWidth = 2;
+    [rectanglePath stroke];
+    
+}
+
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    
-    if (!_bInitialized) {
-        self.contentView.layer.borderColor = [UIColor lightGrayColor].CGColor;
-        self.contentView.layer.borderWidth = 1.0f;
-        
-        CAGradientLayer *shadow = [CAGradientLayer layer];
-        CGSize shadowSize = self.containerView.frame.size;
-        shadow.frame = CGRectMake(-2, 0, shadowSize.width + 4, shadowSize.height + 2);
-        
-        UIColor* lightColor = [[UIColor blackColor] colorWithAlphaComponent:0.0];
-        UIColor* darkColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
-        
-        shadow.colors = [NSArray arrayWithObjects:(id)darkColor.CGColor, (id)lightColor.CGColor, nil];
-        [self.containerView.layer addSublayer:shadow];
-        [self.imageView.layer addSublayer:shadow];
-        
-        _bInitialized = YES;
-    }
-    
-    self.dateLabel.text = [NSString stringWithFormat:@"Received %@",[_model.createDate formatDateByYearsMonthsWeeksDaysHoursMinutes]];
-    
+
     switch (_model.type) {
         case PDNotificationTypeText:
         {
             [self.imageView setHidden:YES];
             [self displayText];
+            [self resizeView:self.textLabel];
             break;
         }
             
@@ -76,39 +82,57 @@
         {
             [self.textLabel setHidden:YES];
             [self displayImage];
+            [self resizeView:self.imageView];
             break;
         }
             
         case PDNotificationTypeBoth:
         {
-            [self displayText];
-            [self displayImage];
+            /* Decided not to implement this one */
             break;
         }
-            
-        default:
-            break;
     }
+    
+    
+}
+
+#pragma mark - Instance Methods
+
+
+-(void)cellWasSwiped:(UISwipeGestureRecognizer *)recognizer
+{
+    [[PDRepository sharedInstance] deleteNotification:_model];
 }
 
 
 - (void)displayText
 {
     NSString * text = [PDStreamParser stringFromData:_model.content];
-    CGSize textSize = [text sizeWithFont:[UIFont systemFontOfSize:15] constrainedToSize:CGSizeMake(295, 400)];
-
+    CGSize textSize = [text sizeWithFont:[UIFont systemFontOfSize:15] constrainedToSize:CGSizeMake(293, 400)];
+    CGRect bounds = self.textLabel.bounds;
+    
     [self.textLabel setHidden:NO];
     [self.textLabel setText:text];
-    [self.textLabel setBounds:CGRectMake(0, 0, textSize.width, textSize.height)];
+    [self.textLabel setBounds:CGRectMake(0, 0, bounds.size.width, textSize.height)];
 }
 
 - (void)displayImage
 {
     [self.imageView setHidden:NO];
     [self.imageView setImage:[PDStreamParser imageFromData:_model.content]];
-    [self.imageView setBounds:CGRectMake(0, 0, 295, 160)];
+    [self.imageView setBounds:CGRectMake(0, 0, 293, 200)];
 }
 
+- (void)resizeView:(UIView *)childView
+{
+    CGSize widthHeight = childView.bounds.size;
+    [childView setFrame:CGRectMake(9, 12, widthHeight.width, widthHeight.height)];
+    
+    CGRect rcCell = self.contentView.frame;
+    rcCell.size = CGSizeMake(rcCell.size.width, childView.frame.origin.y + widthHeight.height + 10);
+    [self.contentView setFrame:rcCell];
+
+}
 
 @end
 
@@ -182,7 +206,39 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     id<NSFetchedResultsSectionInfo> info = [[_notificationController sections] objectAtIndex:section];
-    return [[info objects] count];
+    return [info numberOfObjects];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    CGFloat height = 9.0f; /* The nine value is the y axis point for both controls on the cell */
+    CGFloat padding = 20.0f;
+    
+    PDNotificationModel * model = [_notificationController objectAtIndexPath:indexPath];
+    switch (model.type) {
+        case PDNotificationTypeText:
+        {
+            NSString * text = [PDStreamParser stringFromData:model.content];
+            CGSize textSize = [text sizeWithFont:[UIFont systemFontOfSize:15] constrainedToSize:CGSizeMake(293, 400)];
+            height += textSize.height + padding;
+            break;
+        }
+            
+        case PDNotificationTypeImage:
+        {
+            UIImage * image = [PDStreamParser imageFromData:model.content];
+            height += image.size.height + padding;
+            break;
+        }
+            
+        case PDNotificationTypeBoth:
+        {
+            /* Decided not to implement this one */
+            break;
+        }
+    }
+    
+    return height;
 }
 
 
@@ -203,24 +259,6 @@
 
 
 #pragma mark - NSFetchedResultController Delegate
-
-- (void)controller:(NSFetchedResultsController *)controller
-  didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
-           atIndex:(NSUInteger)sectionIndex
-     forChangeType:(NSFetchedResultsChangeType)type
-{
-    switch(type) {
-        case NSFetchedResultsChangeInsert:
-            [_notificationView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex]
-                             withRowAnimation:UITableViewRowAnimationAutomatic];
-            break;
-            
-        case NSFetchedResultsChangeDelete:
-            [_notificationView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex]
-                             withRowAnimation:UITableViewRowAnimationAutomatic];
-            break;
-    }
-}
 
 - (void)controller:(NSFetchedResultsController *)controller
    didChangeObject:(id)anObject
@@ -251,7 +289,7 @@
         NSString * host = [alertView textFieldAtIndex:0].text;
         NSArray * components = [host componentsSeparatedByString:@":"];
         if (components.count  == 1)
-            host = [NSString stringWithFormat:@"%@:14788", host];
+            host = [NSString stringWithFormat:@"%@:12345", host];
 
         [self showLoadingView];
         [_registrar registerWith:host];
