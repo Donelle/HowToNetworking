@@ -1,10 +1,9 @@
 # HowToNetworking Tutorial
-========================
+--
 A simple HowTo project demonstrating network communication between a Microsoft Windows WCF endpoint and an iOS application. This tutorial source code is written in `C#` and `Objective-C`.
 
 
 ## System Requirements
-----------------------
 
 To install the platform on your computer the following requirements have to be met:
 
@@ -26,7 +25,6 @@ Devices
 
 
 ## Directory Map
-----------------
 
 * clients/ - (root directory for windows and ios clients)
 	
@@ -45,7 +43,7 @@ Devices
 
 
 ## Compilation Instructions
----------------------------
+
 
 #### Microsoft Windows
 
@@ -64,7 +62,7 @@ On `Mac OS X` systems you can open the project using XCode and attaching your iO
 
 
 ## Demo
--------
+
 This demonstration uses a Microsoft Windows client to push content to an iOS client over WIFI. The communcation is unidirectional between the Windows client and the iOS client as described:
 
 
@@ -94,7 +92,12 @@ The following describes the steps you must follow in order to perform the demons
 3. Next, on your Windows system run the **Pusher.exe** client.
 4. Thats it! Now start sending stuff.
 
+## Questions?
 
+If you have any questions or comments about the tutorial please feel free to drop me a line :-).
+
+Email: <donellesanders@thepottersden.com>
+Follow Me: [@DonelleJr](https://twitter.com/DonelleJr)
 
 
 
