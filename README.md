@@ -37,6 +37,7 @@ Devices
 	* PusherService/ - (WCF Service code)
 	* PusherService.Host/ - (Console Application code)
 	* References/ - (Assembly dependencies)
+* Bin/ - (automatically created executing the **msbuild.bat** script)
 * msbuild.bat - client and service compilation script
 * LICENCES.md - (self explanatory)
 * README.md - ( this :-) )
@@ -82,14 +83,16 @@ The following describes the steps you must follow in order to perform the demons
 
 1. On your Windows system, start the **PusherService.Host.exe** console application. After launching successfully, the console should display the current **IP address** and **port** the service is listening on. There are two ways you can execute this service and both require you to **"Run as Administrator"**
 	* **Option 1**- Open PusherService Visual Studio the solution and click **Debug / (F5)**
-	* **Option 2**- Execute PusherService.Host.exe from the commandline.
+	* **Option 2**- Execute PusherService.Host.exe on the commandline from the `Bin` directory on the root.
 
 #### Client Setup
 
 
 1. On your Mac OS X system, open the Pusher project in XCode and click **Run** or (Ctrl+Command+R)
 2. After the app loads, click the button labeled **Setup** on toolbar then enter the **IP Address** that was displayed on the console of **PusherService.Host.exe**.
-3. Next, on your Windows system run the **Pusher.exe** client.
+3. Next, on your Windows system run the **Pusher.exe** client. There are two ways you can execute the client:
+	* **Option 1**- Open Pusher Visual Studio the solution and click **Debug / (F5)**
+	* **Option 2**- Execute Pusher.exe on the commandline from the `Bin` directory on the root.
 4. Thats it! Now start sending stuff.
 
 ## Questions?
