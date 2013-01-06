@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B60865D1698B4B6001DA5BF /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B60865C1698B4B6001DA5BF /* Icon@2x.png */; };
 		2B94E5F81697443B00FE7AC9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B994EFE1694D7BC00A427DF /* CoreGraphics.framework */; };
 		2B994EFB1694D7BC00A427DF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B994EFA1694D7BC00A427DF /* UIKit.framework */; };
 		2B994EFD1694D7BC00A427DF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B994EFC1694D7BC00A427DF /* Foundation.framework */; };
@@ -29,6 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2B60865C1698B4B6001DA5BF /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		2B994EF61694D7BC00A427DF /* Pusher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Pusher.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B994EFA1694D7BC00A427DF /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		2B994EFC1694D7BC00A427DF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -130,6 +132,7 @@
 		2B994F011694D7BC00A427DF /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2B60865C1698B4B6001DA5BF /* Icon@2x.png */,
 				2B994F301694E7C400A427DF /* Pusher.xcdatamodeld */,
 				2B994F221694D9C900A427DF /* MainStoryboard.storyboard */,
 				2B994F021694D7BC00A427DF /* Pusher-Info.plist */,
@@ -200,6 +203,7 @@
 				2B994F0F1694D7BC00A427DF /* Default@2x.png in Resources */,
 				2B994F111694D7BC00A427DF /* Default-568h@2x.png in Resources */,
 				2B994F231694D9C900A427DF /* MainStoryboard.storyboard in Resources */,
+				2B60865D1698B4B6001DA5BF /* Icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
