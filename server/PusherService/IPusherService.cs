@@ -47,11 +47,11 @@ namespace PusherService
 	[ServiceContract (Namespace = "http://thepottersden.com/")]
 	public interface IPusherService 
 	{
-		[OperationContract]
+		[OperationContract(IsOneWay = true)]
 		[WebInvoke (Method = "POST", UriTemplate = "/register", BodyStyle = WebMessageBodyStyle.WrappedRequest, RequestFormat = WebMessageFormat.Json)]
 		void Register (PusherRecipient recipient);
 
-		[OperationContract, WebInvoke(Method = "POST")]
+		[OperationContract (IsOneWay = true), WebInvoke(Method = "POST")]
 		[ServiceKnownType (typeof(PusherRecipient))]
 		void Push (PusherContent content);
 
